@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader</title>
+    <link rel ="stylesheet" href="/staticFiles/main.css">
+    <style>
+        body,
+         .center{
+            margin: center;
+            width: 80%;
+            border: 3px solid black;
+            padding: 10px;
+         }
+    </style>
+    <center>
+    <h1 class="title">
+        Annotation demo app 
+      </h1>
+          <h2 class="subtitle">
+        Upload Text file only 
+      </h2>
+</head>
+<body>
+    <form action = "/display" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <br><br>
+         <input type = "submit"/>
+         <input type = "reset"/>
+      </form>  
+    </center>
+</body>
+</html>

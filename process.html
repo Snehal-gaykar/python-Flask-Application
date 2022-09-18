@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annoting</title>
+    <link rel ="stylesheet" href="/staticFiles/main.css">
+    <style>
+         .center{
+            margin: auto;
+            width: 60;
+            border: 3px solid black;
+            padding: 10px;
+        }
+        .button1{
+            background-color: red;
+        }
+        .button2{
+            background-color: greenyellow;
+        }
+    </style>
+    <center>
+    <h1 class="title">
+        Select to annotate text  
+      </h1>
+</head>
+<body>
+    <form action="/savedata" method="post">
+        <span contenteditable>
+            <input id="anotatedata" name="anotatedata" type="hidden" value=""/>
+            <input id="contentvalue" name="contentvalue" type="hidden" value="{{content}}"/>
+        <pre>{{content}}</pre>
+    </span>
+    <input type="submit" value="Save">
+    </form>
+    <br/><br/>
+        <button id= "b1" class="button button1">Person</button>
+        <button id = "b2" class="button button2">Date</button>
+        
+    <script>
+        document.getElementById("b1").onclick = function(){
+        // Get Selection
+            sel = window.getSelection();
+            if (sel.rangeCount && sel.getRangeAt) {
+            range = sel.getRangeAt(0);
+
+            var anotateinfo = "person,"
+            anotateinfo += range.toString() + ",";
+            anotateinfo += range.startOffset + "-" + range.endOffset + ";";
+            anotatedata.value += anotateinfo;
+            }
+        // Set design mode to on
+            document.designMode = "on";
+            if (range) {
+                sel.removeAllRanges();
+                sel.addRange(range);
+                }
+        // Colorize text
+        document.execCommand("ForeColor", false, "red");
+        // Set design mode to off
+        document.designMode = "off";
+      }
+    </script>
+    <script>
+        document.getElementById("b2").onclick = function(){
+        // Get Selection
+            sel = window.getSelection();
+            if (sel.rangeCount && sel.getRangeAt) {
+            range = sel.getRangeAt(0);
+
+            var anotateinfo = "date,"
+            anotateinfo += range.toString() + ",";
+            anotateinfo += range.startOffset + "-" + range.endOffset + ";";
+            anotatedata.value += anotateinfo;
+        }
+        // Set design mode to on
+            document.designMode = "on";
+            if (range) {
+                sel.removeAllRanges();
+                sel.addRange(range);
+                }
+        // Colorize text
+        document.execCommand("ForeColor", false, "greenyellow");
+        // Set design mode to off
+        document.designMode = "off";
+      }
+    </script>
+</body>
+</html>
